@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="runny-rhino-2736.tribal@free-tier13.aws-eu-central-1.cockroachlabs.cloud" uuid="a15075d8-205d-4efa-8e15-7c78da147d39">
+      <driver-ref>cockroach</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://free-tier13.aws-eu-central-1.cockroachlabs.cloud:26257/runny-rhino-2736.tribal</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
