@@ -13,6 +13,10 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
+	r.Get("/TransactionsCount", func(w http.ResponseWriter, r *http.Request) {
+		transactions := Transaction.GetTransactionsCount()
+		json.NewEncoder(w).Encode(transactions)
+	})
 	r.Get("/Transactions", func(w http.ResponseWriter, r *http.Request) {
 		transactions := Transaction.GetAllTransactions()
 		json.NewEncoder(w).Encode(transactions)
