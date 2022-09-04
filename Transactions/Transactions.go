@@ -56,27 +56,16 @@ func GetAllTransactions() []Transaction {
 	return transactions
 }
 
-//func GetTransactions() []Transaction {
-//	return Transactions
-//}
+func CreateTransaction(w http.ResponseWriter, r *http.Request) sql.Result {
 
-//var Transactions = []Transaction{
-//	{ID: uuid.New(), Amount: 154, Currency: "USD", CreatedAt: time.Now().UTC()},
-//	{ID: uuid.New(), Amount: 2400, Currency: "CLP", CreatedAt: time.Now().UTC()},
-//	{ID: uuid.New(), Amount: 36400, Currency: "COP", CreatedAt: time.Now().UTC()},
-//	{ID: uuid.New(), Amount: 458, Currency: "PEN", CreatedAt: time.Now().UTC()},
-//	{ID: uuid.New(), Amount: 3640, Currency: "COP", CreatedAt: time.Now().UTC()},
-//}
-
-//func GetAllTransactions() []Transaction {
-//	return Transactions
-//}
-
-func CreateTransaction(w http.ResponseWriter, r *http.Request) {
-
+	db, ctx := ConnectDb()
 	var trans *Transaction
 	json.NewDecoder(r.Body).Decode(&trans)
 	trans.ID = uuid.New()
-	//trans.CreatedAt = time.Now().UTC()
-	//if trans.Amount > 0 && trans.Amount <= 100000 {
+	res, err := db.NewInsert().Model(&trans).Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+	return res
+
 }

@@ -22,7 +22,10 @@ func main() {
 		json.NewEncoder(w).Encode(transactions)
 	})
 
-	r.Post("/Transactions/create", Transaction.CreateTransaction)
+	r.Post("/Transactions/create", func(w http.ResponseWriter, r *http.Request) {
+		res := Transaction.CreateTransaction
+		json.NewEncoder(w).Encode(res)
+	})
 
 	http.ListenAndServe(":3000", r)
 }
