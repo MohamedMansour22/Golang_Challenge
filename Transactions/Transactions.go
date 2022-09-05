@@ -5,21 +5,26 @@ import (
 	"database/sql"
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/jackc/pgtype"
 	"github.com/jackc/pgx/v4"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"
 	"log"
 	"net/http"
+	"time"
 )
 
 type Transaction struct {
 	bun.BaseModel `bun:"table:transactions"`
-	ID            uuid.UUID        `bun:"id,notnull,pk,type:uuid,default:gen_random_uuid()"`
-	Amount        float64          `bun:"amount" `
-	Currency      string           `bun:"currency" `
-	CreatedAt     pgtype.Timestamp `bun:"createdat" `
+	ID            uuid.UUID `bun:"id,notnull,pk,type:uuid,default:gen_random_uuid()"`
+	Amount        float64   `bun:"amount" `
+	Currency      string    `bun:"currency" `
+	CreatedAt     string    `bun:"createdat" `
+}
+
+type CreateTransactionRequest struct {
+	Amount   int64  `json:"amount" validate:"notnull,required"`
+	Currency string `json:"currency" validate:"notnull,required"`
 }
 
 func ConnectDb() (db *bun.DB, ctx context.Context) {
@@ -56,16 +61,16 @@ func GetAllTransactions() []Transaction {
 	return transactions
 }
 
-func CreateTransaction(w http.ResponseWriter, r *http.Request) sql.Result {
-
+func CreateTransaction(w http.ResponseWriter, r *http.Request) {
 	db, ctx := ConnectDb()
 	var trans *Transaction
-	json.NewDecoder(r.Body).Decode(&trans)
+	//var transactionsmodel *CreateTransactionRequest
+	err := json.NewDecoder(r.Body).Decode(&trans)
+	//dto.Map(trans, transactionsmodel)
 	trans.ID = uuid.New()
-	res, err := db.NewInsert().Model(&trans).Exec(ctx)
+	trans.CreatedAt = time.Now().Format("02-Jan-2006 15:04:05")
+	_, err = db.NewInsert().Model(trans).Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
-	return res
-
 }
