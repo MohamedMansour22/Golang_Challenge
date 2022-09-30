@@ -3,13 +3,19 @@ module main.go
 go 1.18
 
 require (
+	github.com/go-chi/chi/v5 v5.0.7
+	github.com/google/uuid v1.3.0
+	github.com/jackc/pgx/v4 v4.17.0
+	github.com/uptrace/bun v1.1.7
+	github.com/uptrace/bun/dialect/pgdialect v1.1.7
+	github.com/uptrace/bun/driver/pgdriver v1.1.7
+)
+
+require (
 	github.com/cockroachdb/apd v1.1.0 // indirect
-	github.com/dranikpg/dto-mapper v0.1.1 // indirect
 	github.com/fatih/color v1.13.0 // indirect
-	github.com/go-chi/chi/v5 v5.0.7 // indirect
 	github.com/go-stack/stack v1.8.1 // indirect
 	github.com/gofrs/uuid v4.2.0+incompatible // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/fake v0.0.0-20150926172116-812a484cc733 // indirect
@@ -19,7 +25,6 @@ require (
 	github.com/jackc/pgproto3/v2 v2.3.1 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
 	github.com/jackc/pgtype v1.12.0 // indirect
-	github.com/jackc/pgx/v4 v4.17.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/lib/pq v1.10.6 // indirect
@@ -31,10 +36,7 @@ require (
 	github.com/shopspring/decimal v1.3.1 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
-	github.com/uptrace/bun v1.1.7 // indirect
-	github.com/uptrace/bun/dialect/pgdialect v1.1.7 // indirect
 	github.com/uptrace/bun/dialect/sqlitedialect v1.1.7 // indirect
-	github.com/uptrace/bun/driver/pgdriver v1.1.7 // indirect
 	github.com/uptrace/bun/driver/sqliteshim v1.1.7 // indirect
 	github.com/uptrace/bun/extra/bundebug v1.1.7 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect

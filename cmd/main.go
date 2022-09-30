@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"main.go/internal/adapters/api"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	Transaction "main.go/Transactions"
 )
 
 func main() {
@@ -14,15 +14,15 @@ func main() {
 	r.Use(middleware.Logger)
 
 	r.Get("/TransactionsCount", func(w http.ResponseWriter, r *http.Request) {
-		transactions := Transaction.GetTransactionsCount()
+		transactions := api.GetTransactionsCount()
 		json.NewEncoder(w).Encode(transactions)
 	})
 	r.Get("/Transactions", func(w http.ResponseWriter, r *http.Request) {
-		transactions := Transaction.GetAllTransactions()
+		transactions := api.GetAllTransactions()
 		json.NewEncoder(w).Encode(transactions)
 	})
 
-	r.Post("/Transactions/create", Transaction.CreateTransaction)
+	r.Post("/Transactions/create", api.CreateTransaction)
 
 	http.ListenAndServe(":3000", r)
 }
