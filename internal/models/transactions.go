@@ -11,5 +11,5 @@ type Transaction struct {
 	Amount        float64   `bun:"amount" `
 	Currency      string    `bun:"currency" `
 	CreatedAt     string    `bun:"createdat" `
-	Status        bool      `bun:"IsActive" `
+	Status        bool      `bun:"status" `
 }
