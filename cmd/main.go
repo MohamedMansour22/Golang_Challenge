@@ -1,28 +1,13 @@
 package main
 
 import (
-	"encoding/json"
-	"main.go/internal/adapters/api"
-	"net/http"
-
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	router "main.go/internal/adapters/api"
+	"main.go/internal/adapters/stream"
 )
 
 func main() {
-	r := chi.NewRouter()
-	r.Use(middleware.Logger)
 
-	r.Get("/TransactionsCount", func(w http.ResponseWriter, r *http.Request) {
-		transactions := api.GetTransactionsCount()
-		json.NewEncoder(w).Encode(transactions)
-	})
-	r.Get("/Transactions", func(w http.ResponseWriter, r *http.Request) {
-		transactions := api.GetAllTransactions()
-		json.NewEncoder(w).Encode(transactions)
-	})
+	go stream.Consume()
+	router.HandleRequest()
 
-	r.Post("/Transactions/create", api.CreateTransaction)
-
-	http.ListenAndServe(":3000", r)
 }
